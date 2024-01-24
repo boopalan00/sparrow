@@ -5,37 +5,46 @@ we can cusomize it    )
 */
 SERVER = [
     {   id : 1,
-        'name':``,
-        'tag':`<nav><a href="">Navbar</a></nav>`,
-        '':''
+        'name':`btn-1`,
+        'tag':`<button type="button" class="btn btn-warning">Warning</button>`
     },
     {   id : 2,
-        'name':``,
-        'tag':`<nav><a href="">Navbar</a></nav>`,
+        'name':`btn-2`,
+        'tag':`<button type="button" class="btn btn-success">Warning</button>`,
+    },
+    {   id : 3,
+        'name':`btn-3`,
+        'tag':`<button type="button" class="btn btn-info">Warning</button>`
+    },
+    {   id : 4,
+        'name':`btn-4`,
+        'tag':`<button type="button" class="btn btn-danger">Warning</button>`,
     }
 ]
  
-const wrapper = document.querySelector('.wrapper')
 
-Dragable_elements = ''
+// Dragable components are generated here
 
-for ()
+var dc = ``
+SERVER.forEach(EL => {
+    dc += `
+        <div draggable="true" class="m-2 ">
+            ${EL.tag}
+        </div>
+        `
+})
 
-wrapper.innerHTML = 
+document.querySelector('.wrapper').innerHTML = dc
+document.querySelector('.main').innerHTML = dc
 
-// SERVER.forEach( EL => {
-//     wrapper.innerHTML(
-//         `<h1> ${EL.id} </h1>`
-//     )
-// });
-    
+const components = document.querySelectorAll('.m-2')
 
-// components.forEach(component =>{
-//     component.addEventListener('dragstart',()=>{
-//         component.classList.add('dragging')
-//         component.innerHTML = Navbar
-//     })
-// })
+components.forEach(component =>{
+    component.addEventListener('dragstart',()=>{
+       // const clone = component.cl
+       // component.innerHTML = ` ${SERVER[1].tag} `
+    })
+})
 
 // components.forEach(component=>{
 //     component.addEventListener('dragend',()=>{
