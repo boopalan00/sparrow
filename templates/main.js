@@ -3,13 +3,20 @@ here we connect with backend for getting each component
 from DB (means: each component is saved in DB. so,
 we can cusomize it    )
 */
+
+NAV = `<nav class="navbar bg-body-tertiary bg-dark">
+<div class="container-fluid">
+    <span class="navbar-brand mb-0 h1">Navbar</span>
+</div>
+</nav>`
+
 SERVER = [
     {   id : 1,
         'name':`btn-1`,
         'tag':`<button type="button" class="btn btn-warning">Warning</button>`
     },
     {   id : 2,
-        'name':`btn-2`,
+        'name':`navbar`,
         'tag':`<button type="button" class="btn btn-success">Warning</button>`,
     },
     {   id : 3,
@@ -25,24 +32,26 @@ SERVER = [
 
 // Dragable components are generated here
 
+// Blocks
+
 var dc = ``
-SERVER.forEach(EL => {
-    dc += `
-        <div draggable="true" class="m-2 ">
-            ${EL.tag}
-        </div>
-        `
-})
+SERVER.forEach(EL => { dc += 
+`<div>
+    <div draggable="true" id="Block">
+        ${EL.tag}
+    </div>
+</div>
+`})
 
-document.querySelector('.wrapper').innerHTML = dc
-document.querySelector('.main').innerHTML = dc
+document.querySelector('#Blocks').innerHTML = dc
 
-const components = document.querySelectorAll('.m-2')
+const Blocks = document.querySelectorAll('#Block')
 
-components.forEach(component =>{
-    component.addEventListener('dragstart',()=>{
-       // const clone = component.cl
-       // component.innerHTML = ` ${SERVER[1].tag} `
+Blocks.forEach( block =>{
+    block.addEventListener('dragstart',()=>{
+        // const block_clone = block.cloneNode
+        // block.parentElement.innerHTML =  SERVER[3].tag 
+        // block.innerHTML = NAV
     })
 })
 

@@ -1,40 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drag and Drop UI Builder</title>
+  <style>
+    #toolbox {
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 200px;
+  float: left;
+}
+
+.toolbox-item {
+  background-color: #f4f4f4;
+  border: 1px solid #ccc;
+  margin-bottom: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+#canvas {
+  border: 1px solid #ccc;
+  min-height: 300px;
+  margin-left: 220px;
+}
+
+  </style>
 </head>
 <body>
-    
+  <div id="toolbox">
+    <div class="toolbox-item" draggable="true" data-element-type="button">Button</div>
+    <div class="toolbox-item" draggable="true" data-element-type="input">Input</div>
+    <!-- Add more toolbox items as needed -->
+  </div>
+  <div id="canvas" droppable="true"></div>
 
-
-
-<div>
-
-</div>
-
-
-
-
-<div class="component">
-
-<div class="">nav</div>
-
-<div>1</div>
-
-</div>
+   
 
 
 
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+  const toolboxItems = document.querySelectorAll('.toolbox-item');
+  const canvas = document.getElementById('canvas');
 
+  toolboxItems.forEach(item => {
+    item.addEventListener('dragstart', (e) => {
+      e.dataTransfer.setData('text/plain', e.target.dataset.elementType);
+    });
+  });
 
+  canvas.addEventListener('dragover', (e) => {
+    e.preventDefault();
+  });
 
+  canvas.addEventListener('drop', (e) => {
+    e.preventDefault();
+    const elementType = e.dataTransfer.getData('text/plain');
+    const element = document.createElement('div');
+    element.textContent = elementType;
+    element.classList.add('ui-element');
+    canvas.appendChild(element);
+  });
+});
 
-
-
+  </script>
 </body>
 </html>
-
-
