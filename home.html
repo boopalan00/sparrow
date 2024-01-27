@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drag and Drop UI Builder</title>
+  <style>
+   #draggable {
+    position: absolute;
+    cursor: move;
+}
+
+  </style>
+</head>
+<body>
+ 
+ 
+    <button id="draggable" draggable="true">Drag me!</button>
+    <script src="home.js"></script>
+
+
+
+
+
+  <script>
+   
+   document.addEventListener('DOMContentLoaded', () => {
+    const originalButton = document.getElementById('draggable');
+
+    originalButton.addEventListener('dragstart', (e) => {
+        const newButton = originalButton.cloneNode(true);
+        newButton.innerText = 'Drag XXXXXXX!';
+        newButton.style.position = 'absolute';
+        newButton.style.left = originalButton.offsetLeft + 'px';
+        newButton.style.top = originalButton.offsetTop + 'px';
+        document.body.appendChild(newButton);
+
+        e.dataTransfer.setData('text/plain', null); // for Firefox compatibility
+        const offsetX = e.clientX - originalButton.getBoundingClientRect().left;
+        const offsetY = e.clientY - originalButton.getBoundingClientRect().top;
+
+        e.dataTransfer.setDragImage(newButton, offsetX, offsetY);
+
+        newButton.addEventListener('dragend', (endEvent) => {
+            newButton.style.left = endEvent.pageX - offsetX + 'px';
+            newButton.style.top = endEvent.pageY - offsetY +'px';
+        });
+    });
+
+    document.addEventListener('dragover', (e) => {
+        e.preventDefault();
+    });
+});
+  </script>
+</body>
+</html>
